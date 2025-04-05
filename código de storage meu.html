@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        (function(Scratch) {
+    'use strict';
+
+    class JgStorageBlocks {
+        constructor() {
+            this.currentServer = "https://storage-ext.penguinmod.com/";
+            this.usePenguinMod = true;
+            this.useGlobal = true;
+            this.waitingForResponse = false;
+            this.serverFailedResponse = false;
+            this.serverError = "";
+        }
+
+        getInfo() {
+            return {
+                id: 'jgStorage',
+                name: 'Storage',
+                color1: '#76A8FE',
+                color2: '#538EFC',
+                docsURI: 'https://docs.penguinmod.com/extensions/storage',
+                blocks: [
+                    {
+                        blockType: Scratch.BlockType.LABEL,
+                        text: "Local Storage"
+                    },
+                    {
+                        opcode: 'getValue',
+                        blockType: Scratch.BlockType.REPORTER,
+                        disableMonitor: true,
+                        text: 'get [KEY]',
+                        arguments: {
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'key'
+                            }
+                        }
+                    },
+                    {
+                        opcode: 'setValue',
+                        blockType: Scratch.BlockType.COMMAND,
+                        text: 'set [KEY] to [VALUE]',
+                        arguments: {
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'key'
+                            },
+                            VALUE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'value'
+                            }
+                        }
+                    },
+                    {
+                        opcode: 'deleteValue',
+                        blockType: Scratch.BlockType.COMMAND,
+                        text: 'delete [KEY]',
+                        arguments: {
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'key'
+                            }
+                        }
+                    },
+                    {
+                        opcode: 'getKeys',
+                        blockType: Scratch.BlockType.REPORTER,
+                        disableMonitor: true,
+                        text: 'get all stored names'
+                    },
+                    {
+                        blockType: Scratch.BlockType.LABEL,
+                        text: "Local Uploaded Project Storage"
+                    },
+                    {
+                        opcode: 'getProjectValue',
+                        blockType: Scratch.BlockType.REPORTER,
+                        disableMonitor: true,
+                        text: 'get project [KEY]',
+                        arguments: {
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'key'
+                            }
+                        }
+                    },
+                    {
+                        opcode: 'setProjectValue',
+                        blockType: Scratch.BlockType.COMMAND,
+                        text: 'set project [KEY] to [VALUE]',
+                        arguments: {
+                            KEY: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'key'
+                            },
+                            VALUE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'value'
+                            }
+                        }
+                    }
+                ]
+            };
+        }
+
+        // Aqui ficam suas funções getValue, setValue, deleteValue, etc...
+    }
+
+    Scratch.extensions.register(new JgStorageBlocks());
+})(Scratch);
+
+    </script>
+    
+</body>
+</html>
