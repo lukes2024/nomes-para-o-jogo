@@ -1,1 +1,59 @@
+const express = require('express');
+const app = express();
 
+app.use(express.json());
+
+// Banco de dados (simples na memória)
+const db = {};
+
+// Salvar valor
+app.post('/set/:key', (req, res) => {
+    const key = req.params.key;
+    const value = req.body.value;
+    db[key] = value;
+    res.send(`Salvo: ${key} = ${value}`);
+});
+
+// Pegar valor
+app.get('/get/:key', (req, res) => {
+    const key = req.params.key;
+    if (key in db) {
+        res.send(db[key]);
+    } else {
+        res.status(404).send('Nada salvo aqui não...');
+    }
+});
+
+// Deletar valor
+app.delete('/delete/:key', (req, res) => {
+    const key = req.params.key;
+    if (key in db) {
+        delete db[key];
+        res.send(`Deletei o ${key}`);
+    } else {
+        res.status(404).send('Já não tinha nada pra deletar...');
+    }
+});
+
+app.listen(3000, () => {
+    console.log('Servidor tá online e rodando 🔥');
+
+
+
+
+
+
+
+
+
+{
+  "name": "meu-server-do-jogo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
